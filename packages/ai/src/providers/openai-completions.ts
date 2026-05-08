@@ -482,9 +482,27 @@ function createClient(
 				}
 			: headers;
 
+	// Allow per-provider base URL overrides via environment variables
+	const providerBaseUrlOverrides: Record<string, string | undefined> = {
+		cerebras: process.env.CEREBRAS_BASE_URL,
+		openai: process.env.OPENAI_BASE_URL,
+		xai: process.env.XAI_BASE_URL,
+		groq: process.env.GROQ_BASE_URL,
+		mistral: process.env.MISTRAL_BASE_URL,
+	};
+
+	let resolvedBaseUrl: string;
+	if (isCloudflareProvider(model.provider)) {
+		resolvedBaseUrl = resolveCloudflareBaseUrl(model);
+	} else if (providerBaseUrlOverrides[model.provider]) {
+		resolvedBaseUrl = providerBaseUrlOverrides[model.provider]!;
+	} else {
+		resolvedBaseUrl = model.baseUrl;
+	}
+
 	return new OpenAI({
 		apiKey,
-		baseURL: isCloudflareProvider(model.provider) ? resolveCloudflareBaseUrl(model) : model.baseUrl,
+		baseURL: resolvedBaseUrl,
 		dangerouslyAllowBrowser: true,
 		defaultHeaders,
 	});

@@ -312,6 +312,7 @@ ${chalk.bold("Environment Variables:")}
   GEMINI_API_KEY                   - Google Gemini API key
   GROQ_API_KEY                     - Groq API key
   CEREBRAS_API_KEY                 - Cerebras API key
+  CEREBRAS_BASE_URL                - Cerebras base URL override (e.g. http://localhost:7800/v1)
   XAI_API_KEY                      - xAI Grok API key
   FIREWORKS_API_KEY                - Fireworks API key
   TOGETHER_API_KEY                 - Together AI API key
