@@ -485,6 +485,7 @@ function createClient(
 	// Allow per-provider base URL overrides via environment variables
 	const providerBaseUrlOverrides: Record<string, string | undefined> = {
 		cerebras: process.env.CEREBRAS_BASE_URL,
+		zai: process.env.ZAI_BASE_URL,
 		openai: process.env.OPENAI_BASE_URL,
 		xai: process.env.XAI_BASE_URL,
 		groq: process.env.GROQ_BASE_URL,
